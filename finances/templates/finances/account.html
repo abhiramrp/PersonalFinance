@@ -1,0 +1,64 @@
+{% extends "finances/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>{{ account.name }}</h2> 
+
+    
+    <h5>Total Amount: ${{account.all_money}} </h5>
+
+    <div class="float-container" >
+      {% if plabels %}
+      <div class="float-child" style="width: 20%vw; display: inline-block;" >
+        <h5 style="text-align: center;">Income</h5>
+        <canvas id="income"></canvas>
+      </div>
+      {% endif %}
+      {% if nlabels %}
+      <div class="float-child" style="width: 20%vw; display: inline-block;">
+        <h5 style="text-align: center;">Expenses</h5>
+        <canvas id="expenses"></canvas>
+      </div>
+      {% endif %}
+    </div>
+
+    <br>
+
+    {% include 'finances/transactions.html' %}
+
+    <br>
+
+
+    <ul class="pagination">
+        {% if transactions.has_previous %}
+            <li class="page-item"><a class="page-link" href="{% url 'account_trans' account.id %}?page={{transactions.previous_page_number}}">Previous</a></li>
+        {% endif %}
+
+        <li class="page-item"><a class="page-link" href="{% url 'account_trans' account.id %}?page={{transactions.number}}">{{transactions.number}}</a></li>
+
+        {% if transactions.has_next %}
+            <li class="page-item"><a class="page-link" href="{% url 'account_trans' account.id %}?page={{transactions.next_page_number}}">Next</a></li>
+        {% endif %}
+
+    </ul>
+
+    <script>
+
+      createPiechart({{plabels|safe}}, {{pdata|safe}}, "Income", 'income');
+      createPiechart({{nlabels|safe}}, {{ndata|safe}}, "Expenses", 'expenses');
+
+
+    </script>
+
+    <a href="{% url 'delete_account' account.id %}">Delete Account</a>
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'finances/index.js' %}"></script>
+    <script src="{% static 'finances/graphs.js' %}"></script>
+{% endblock %}

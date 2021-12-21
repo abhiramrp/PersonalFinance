@@ -1,0 +1,52 @@
+
+
+<div class="table-scrollable">
+<table>
+    {% if transactions %}
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Account</th>
+        <th>Category</th>
+        <th>Important</th>
+        <th>Datetime</th>
+        <th>Delete</th>
+    </tr>
+
+    {% else %}
+
+    Sorry no transactions. <a href="{% url 'add_transaction' %}">Please create one.</a>
+
+    {% endif %}
+
+
+
+    {% for t in transactions %}
+
+    <tr id="trans-{{t.id}}">
+
+        {% if t.description %}
+            <td title="{{ t.description }}">{{ t.name }}</td>
+        {% else %}
+            <td>{{ t.name }} {{t.description}}</td>
+        {% endif %}
+        <td>{{ t.price }}</td>
+        <td><a href="{% url 'account_trans' t.raccount.id %}">{{ t.raccount.name }}</a></td>
+        <td><a href="{% url 'category_trans' t.category %}">{{ t.category }}</a></td>
+        <td style="text-align: center"> 
+            {% if t.important %}
+            &#9989;
+            {% endif %}
+        </td>
+        <td>{{ t.time }}</td>
+        <td>
+            <button class="btn" onclick="delete_trans({{t.id}})">
+                <span style="cursor:pointer;">&#10060;</span>
+            </button>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+</div>

@@ -1,0 +1,106 @@
+{% extends "finances/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+
+    <div class="d-flex flex-row">
+    <div class="p-2">
+        <h2>{{user.username}}</h2>
+        <h4>Total Amount: ${{ user.all_money }} </h4>
+
+
+        {% for a in accs %}
+
+        <a href="{% url 'account_trans' a.id %}">{{ a.name }}</a>: ${{ a.all_money }}
+        <br>
+
+        {% endfor %}
+
+        <br>
+
+        <a href="{% url 'add_account' %}">Add an Account</a>
+
+        <br>
+    </div>
+    </div>
+
+
+        <div class="float-container">
+            {% if plabels %}
+            <div class="float-child" style="display:inline-block; width: 20%vw;" >
+              <h5 style="text-align: center;">All Income</h5>
+              <canvas id="income"></canvas>
+            </div>
+            {% endif %}
+            {% if nlabels %}
+            <div class="float-child" style="display:inline-block; width: 20%vw;">
+              <h5 style="text-align: center;">All Expenses</h5>
+              <canvas id="expenses"></canvas>
+            </div>
+            {% endif %}
+        </div>
+
+ 
+
+        {% if wlabels %}
+            <div style="width: 30%vw; display: inline-block;">
+              <h4 style="text-align: center;">Unnecesary Expenses</h4>
+              <canvas id="unnecesary"></canvas>
+            </div>
+        {% endif %}
+
+        
+
+        <script>
+
+            createPiechart({{plabels|safe}}, {{pdata|safe}}, "Income", 'income');
+            createPiechart({{nlabels|safe}}, {{ndata|safe}}, "Expenses", 'expenses');
+            createPiechart({{wlabels|safe}}, {{wdata|safe}}, "Unnecesary Expenses", 'unnecesary');
+      
+      
+        </script>
+      
+        
+
+
+
+    {% else %}
+        <h1 style="text-align: center;">Personal Finance</h1>
+
+        <div style="text-align: center;">
+        <a data-flickr-embed="true" href="https://www.flickr.com/photos/68751915@N05/6793826885" title="Money - Savings">
+                <img src="https://live.staticflickr.com/7148/6793826885_d3b6befb99.jpg" class="img-fluid" width="500" height="375" alt="Money - Savings">
+        </a>
+        <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+        </div>
+
+        <h4 style="font-style: italic; text-align: center;">Track your income and expenses easily!</h4>
+
+        <br>
+
+        <div class="float-container" style="text-align: center;">
+            <div class="float-child" style="display: inline-block; text-align: right;" >
+                <h5><a href="{% url 'login' %}">Log In</a></h5>
+
+            </div>
+
+            <br>
+            
+            <div class="float-child" style="display: inline-block; text-align: left;">
+                <h5><a href="{% url 'register' %}">Register</a></h5>
+
+            </div>
+
+        </div>
+
+
+    {% endif %}
+    
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'finances/index.js' %}"></script>
+    <script src="{% static 'finances/graphs.js' %}"></script>
+{% endblock %}

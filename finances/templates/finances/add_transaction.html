@@ -1,0 +1,20 @@
+{% extends "finances/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <h1>Add a transcation</h1>
+
+    <form action="{% url 'add_transaction' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <input class="btn btn-primary" type="submit" value="Submit">
+
+    </form>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'finances/index.js' %}"></script>
+{% endblock %}
