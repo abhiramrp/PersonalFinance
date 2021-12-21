@@ -65,7 +65,7 @@ Thus, this project satifies the distinctiveness and complexity needed for this c
 
 
 # Additional Info
-This project didn't install any additional files or packages. For the Javascript and CSS operations, Bootstrap and other programs are in the header of layout.html](finances/templates/finances/layout.html)
+This project didn't install any additional files or packages. For the Javascript and CSS operations, Bootstrap and other programs are in the header of [layout.html](finances/templates/finances/layout.html)
 
 
 
