@@ -57,7 +57,6 @@ Thus, this project satifies the distinctiveness and complexity needed for this c
     - [views.py](finances/views.py): File that has the routes and completes them with paraemeters, requests, etc. 
     - [db.sqlite3](db.sqlite3): The database where all the information will be stored
     - [manage.py](manage.py): Main file. Rnns the application. 
-    - [READMe.md](READMe.md): You are reading me right now
 
 
 ## How to run
