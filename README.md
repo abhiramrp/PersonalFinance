@@ -6,6 +6,9 @@
 
 'Personal Finance' is a project where people can manage and track their expenses. It is hard to keep track of checking, credit card, etc. and this application can help users with that. 
 
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/pLwWa1HFi08/0.jpg)](http://www.youtube.com/watch?v=pLwWa1HFi08)
+
+
 ## Distinctiveness and Complexity
 
 This project is distinct from previous CS50 projects because it it not a social media website or trading website. Users in this application are prevented from looking at other users' data and are not 
